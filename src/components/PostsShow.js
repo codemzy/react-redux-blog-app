@@ -6,12 +6,21 @@ import { Link } from 'react-router';
 import { fetchPost, deletePost } from '../actions/index.js';
 
 class PostsShow extends React.Component {
+    constructor(props, context) {
+        super(props);
+        context.router;
+    }
+    
     componentWillMount() {
         this.props.dispatch(fetchPost(this.props.params.id));
     }
     
     _onDeleteClick() {
-        this.props.dispatch(deletePost(this.props.params.id));
+        this.props.dispatch(deletePost(this.props.params.id))
+            .then(() => {
+                // blog post has been deleted navigate to index
+                this.context.router.push('/');
+            });
     }
     
     render() {
@@ -31,6 +40,10 @@ class PostsShow extends React.Component {
         );
     }
 }
+
+PostsShow.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 
 export default connect((state) => {
     return {
