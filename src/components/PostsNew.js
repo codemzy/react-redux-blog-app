@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 
 // actions
 import { createPost } from '../actions/index.js';
@@ -29,6 +30,7 @@ class PostsNew extends React.Component {
                     <div className="text-help form-control-label">{content.touched ? content.error : '' }</div>
                 </div>
                 <button type="submit" className="btn btn-primary">Add Post</button>
+                <Link to='/' className="btn btn-danger">Cancel</Link>
             </form>
         );
     }
