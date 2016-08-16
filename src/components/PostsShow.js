@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // actions
 import { fetchPost } from '../actions/index.js';
@@ -17,6 +18,7 @@ class PostsShow extends React.Component {
         
         return (
             <div>
+                <Link to="/">Back to homepage</Link>
                 <h3>{post.title}</h3>
                 <h6>Categories: {post.categories}</h6>
                 <p>{post.content}</p>
