@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // actions
 import { fetchPosts } from '../actions/index.js';
@@ -13,7 +14,12 @@ class PostsIndex extends React.Component {
     
     render() {
         return (
-            <div>List of blog posts</div>
+            <div>
+                <div className="text-xs-right">
+                    <Link to="/posts/new" className="btn btn-primary">Add a Post</Link>
+                </div>
+                List of blog posts
+            </div>
         );
     }
 }
