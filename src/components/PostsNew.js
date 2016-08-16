@@ -8,11 +8,23 @@ import { createPost } from '../actions/index.js';
 
 
 class PostsNew extends React.Component {
+    constructor(props, context) {
+        super(props);
+        context.router;
+    }
+    
+    _onSubmit(props) {
+        this.props.createPost(props)
+            .then(() => {
+                // blog post has been created navigate to index
+                this.context.router.push('/');
+            });
+    }
     
     render() {
         const { handleSubmit, fields: {title, categories, content} } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.props.createPost)}>
+            <form onSubmit={handleSubmit(this._onSubmit.bind(this))}>
                 <h3>Create a new post</h3>
                 <div className={`form-group ${title.touched && title.invalid ? 'has-danger' : ''}`}>
                     <label>Title</label>
@@ -49,6 +61,10 @@ function validate(values) {
     }
     return ERRORS;
 }
+
+PostsNew.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 
 export default reduxForm({
     form: 'PostsNewForm',
